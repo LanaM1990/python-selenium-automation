@@ -8,7 +8,7 @@ Feature: Amazon cart verification
 
   Scenario: User adds purse to the empty cart
    Given Open Amazon page
-    When Input Purses into search field
+    When Input text Purses into search field
     When Click on search icon
     And  Click on the first search result
      And Click on Add to Cart Button
