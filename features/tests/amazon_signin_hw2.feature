@@ -8,4 +8,10 @@ Feature: Amazon sign in page verification
     Then Verify sign in header is shown
     And Verify email input field is present
 
+  Scenario: Sign in page can be opened from sign In popup
+    Given Open Amazon page
+    When Click Sign In from popup
+    Then Verify Sign in page opens
+
+
 

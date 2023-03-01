@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
+
 
 AMAZON_SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
 AMAZON_SEARCH_ICON = (By.ID, 'nav-search-submit-button')
@@ -7,6 +9,7 @@ HAM_MENU = (By.ID, "nav-hamburger-menu")
 FOOTER_LINKS = (By.CSS_SELECTOR, 'table.navFooterMoreOnAmazon td.navFooterDescItem')
 BESTSELLERS_TAB = (By.CSS_SELECTOR, 'a[data-csa-c-content-id="nav_cs_bestsellers"]')
 CUSTOMER_SERVICE_TAB = (By.CSS_SELECTOR, 'a.nav-a[data-csa-c-slot-id="nav_cs_3"]')
+SIGN_IN_BUTTON = (By.CSS_SELECTOR, '#nav-signin-tooltip a.nav-action-button')
 
 
 
@@ -30,17 +33,23 @@ def click_search_button(context):
     context.driver.find_element(*AMAZON_SEARCH_ICON).click()
 
 
+
 @when('Click on Bestsellers tab')
 def click_bestsellers_tab(context):
     context.driver.find_element(*BESTSELLERS_TAB).click()
 
 
+@when('Click Sign In from popup')
+def click_singin_popup(context):
+    context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN_BUTTON)).click()
+
+
 
 @then('Verify hamburger menu icon present')
 def verify_ham_menu_present(context):
-    print('\n Find elements:')
+    # print('\n Find elements:')
     elements = context.driver.find_elements(*HAM_MENU)
-    print(elements)
+    # print(elements)
     assert len(elements) == 1, f'Expected 1 element but got {len(elements)}'
 
 
@@ -49,5 +58,5 @@ def verify_footer_link_count(context, expected_amount):
     expected_amount = int(expected_amount)
     footer_links = context.driver.find_elements(*FOOTER_LINKS)
     # print(footer_links)
-    print('\nLink count:', len(footer_links))
+    # print('\nLink count:', len(footer_links))
     assert len(footer_links) == expected_amount, f'Expected {expected_amount} links, but got {len(footer_links)}'

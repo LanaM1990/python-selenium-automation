@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 def browser_init(context):
@@ -8,6 +9,8 @@ def browser_init(context):
     """
     service = Service(executable_path='/Users/svetlanamikolenko/Desktop/automation/python-selenium-automation/chromedriver')
     context.driver = webdriver.Chrome(service=service)
+    context.driver.wait = WebDriverWait(context.driver, 10)
+
 
     # context.browser = webdriver.Safari()
     # context.browser = webdriver.Firefox()
