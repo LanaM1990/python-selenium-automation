@@ -1,5 +1,5 @@
 # Created by svetlanamikolenko at 2/16/23
-Feature: Amazon sign in page verification
+Feature: Amazon Sign in tests
 
 
   Scenario: Logged out user sees sign in page when clicking on Returns and Orders
@@ -12,6 +12,14 @@ Feature: Amazon sign in page verification
     Given Open Amazon page
     When Click Sign In from popup
     Then Verify Sign in page opens
+
+  Scenario: Sign in popup is visible for a few seconds
+    Given Open Amazon page
+    Then Verify Sign in popup shown
+    When Wait for 5 sec
+    Then Verify Sign in popup shown
+    Then Verify Sign in popup disappears
+
 
 
 

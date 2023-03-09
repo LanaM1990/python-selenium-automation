@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from behave import given, when, then
+from time import sleep
 
 
 AMAZON_SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
@@ -43,14 +44,38 @@ def click_bestsellers_tab(context):
 def click_singin_popup(context):
     context.driver.wait.until(EC.element_to_be_clickable(SIGN_IN_BUTTON)).click()
 
+@when('Wait for {sec} sec')
+def wait_for_sec(context, sec):
+    sleep(int(sec))
+
+
+@then('Verify Sign in popup shown')
+def click_singin_popup_shown(context):
+    context.driver.wait.until(
+        EC.element_to_be_clickable(SIGN_IN_BUTTON),
+        message='Sign in popup is not clickable')
+
+
+@then('Verify Sign in popup disappears')
+def click_singin_popup_disappers(context):
+    context.driver.wait.until(
+        EC.invisibility_of_element_located(SIGN_IN_BUTTON),
+        message='Signin btn did not disappear')
 
 
 @then('Verify hamburger menu icon present')
 def verify_ham_menu_present(context):
     # print('\n Find elements:')
-    elements = context.driver.find_elements(*HAM_MENU)
+    context.hum_menu = context.driver.find_element(*HAM_MENU)
+    context.driver.refresh()
     # print(elements)
-    assert len(elements) == 1, f'Expected 1 element but got {len(elements)}'
+    # assert len(elements) == 1, f'Expected 1 element but got {len(elements)}'
+
+@when('Click on hum menu')
+def click_hum_menu(context):
+    context.hum_menu = context.driver.find_element(*HAM_MENU)
+    context.hum_menu.click()
+
 
 
 @then('Verify that footer has {expected_amount} links')
