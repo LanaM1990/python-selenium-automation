@@ -6,6 +6,14 @@ Feature: Amazon empty cart verification
     When Click on cart
     Then Verify the cart is empty
 
+ Scenario Outline: User clicks on the cart and sees that its empty
+   Given Open Amazon page
+    When Click on cart
+    Then Verify <expected_cart_text> text present
+  Examples:
+  | expected_cart_text       |
+  | Your Amazon Cart is empty|
+
   Scenario: User adds purse to the empty cart
    Given Open Amazon page
     When Input text Purses into search field
