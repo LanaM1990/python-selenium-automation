@@ -36,7 +36,9 @@ def verify_images_present(context):
         assert images.is_displayed(), f'No image found'
     # or  assert images.get_attribute('src'), f'No image found'
 
-
+@then('Verify {category} department is selected')
+def verify_department_selected(context, category):
+    context.app.search_results_page.verify_department_selected(category)
 
 
 

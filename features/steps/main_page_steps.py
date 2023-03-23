@@ -61,6 +61,22 @@ def wait_for_sec(context, sec):
     sleep(int(sec))
 
 
+@when('Hover over language options')
+def hover_lang_options(context):
+    context.app.header.hover_lang_options()
+
+
+@when('Click on hum menu')
+def click_hum_menu(context):
+    context.hum_menu = context.driver.find_element(*HAM_MENU)
+    context.hum_menu.click()
+
+
+@when('Select department by alias {alias}')
+def select_dept_by_alias(context, alias):
+    context.app.header.select_dept_by_alias(alias)
+
+
 @then('Verify Sign in popup shown')
 def click_singin_popup_shown(context):
     context.driver.wait.until(
@@ -83,11 +99,6 @@ def verify_ham_menu_present(context):
     # print(elements)
     # assert len(elements) == 1, f'Expected 1 element but got {len(elements)}'
 
-@when('Click on hum menu')
-def click_hum_menu(context):
-    context.hum_menu = context.driver.find_element(*HAM_MENU)
-    context.hum_menu.click()
-
 
 @then('Verify that footer has {expected_amount} links')
 def verify_footer_link_count(context, expected_amount):
@@ -96,3 +107,9 @@ def verify_footer_link_count(context, expected_amount):
     # print(footer_links)
     # print('\nLink count:', len(footer_links))
     assert len(footer_links) == expected_amount, f'Expected {expected_amount} links, but got {len(footer_links)}'
+
+@then('Verify Spanish option present')
+def verify_lang_shown(context):
+    sleep(4)
+    context.app.header.verify_lang_shown()
+

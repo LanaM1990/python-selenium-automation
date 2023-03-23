@@ -25,6 +25,10 @@ def get_product_name(context):
     context.product_name = context.driver.find_element(*PRODUCT_NAME).text
     # print(f'Current product:{context.product_name}')
 
+@when('Hover over New Arrivals')
+def hover_over_new_arrivals(context):
+    context.app.product_page.hover_over_new_arrivals()
+
 @then('Verify user can click through colors')
 def verify_click_thr_colors(context):
     all_color_options = context.driver.find_elements(*COLOR_OPTIONS)
@@ -39,3 +43,7 @@ def verify_click_thr_colors(context):
 
         actual_colors += [current_color]
     assert expected_colors == actual_colors, f'Expected {expected_colors} but got {actual_colors}'
+
+@then('Verify user can see deals')
+def verify_user_sees_deals(context):
+    context.app.product_page.verify_user_sees_deals()

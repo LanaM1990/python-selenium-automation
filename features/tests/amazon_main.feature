@@ -11,3 +11,10 @@ Feature: Amazon main page tests
     Given Open Amazon page
     Then Verify that footer has 42 links
 
+  Scenario: User can see language options
+    Given Open Amazon page
+    When Hover over language options
+    Then Verify Spanish option present
+
+
+

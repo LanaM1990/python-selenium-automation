@@ -28,3 +28,16 @@ Feature: Amazon search tests
 #    Then Verify that product name is shown for every product
 #    And Verify that product image is shown for every product
 
+  Scenario Outline: User can select and search in a department
+    Given Open Amazon page
+    When Select department by alias <alias>
+    When Input text <text> into search field
+    When Click on search icon
+    Then Verify <search result> department is selected
+    Examples:
+      |alias       |text     |search result |
+      |stripbooks  |Faust    |books         |
+      |audible     |Faust    |audible       |
+      |fashion     |dress    |apparel|
+      |pets        |cat food |pet-supplies |
+
